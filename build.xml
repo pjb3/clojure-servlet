@@ -1,0 +1,20 @@
+<project name="ClojureServlet" basedir="." default="build">
+  
+  <path id="classpath">
+    <fileset dir="lib" includes="**/*.jar"/>
+  </path>  
+  
+  <target name="build">
+    <mkdir dir="build"/>
+    <copy todir="build">
+      <fileset dir="src">
+        <include name="clojure/servlet/*.clj"/>
+      </fileset>
+    </copy>
+    <java fork="true" classname="clojure.lang.Script" classpathref="classpath">
+      <arg value="src/gen-servlet.clj"/>
+    </java>  
+    <jar destfile="clojure-servlet.jar" basedir="build"/>
+  </target>
+  
+</project>
